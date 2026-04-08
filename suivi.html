@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GUASP — Suivi dossier</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/suivi.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="top">
+        <div>
+          <div class="eyebrow">Détail / Suivi dossier</div>
+          <div class="title" id="s-title">—</div>
+          <div class="sub" id="s-sub">—</div>
+        </div>
+        <div class="actions">
+          <img class="logo" src="./assets/images/Logo.png" alt="Logo GUASP" />
+          <a class="btn-ghost" id="btn-back" href="./dashboard.html">Retour</a>
+        </div>
+      </header>
+
+      <div class="grid">
+        <section class="card">
+          <div class="ch">
+            <div>
+              <div class="ck">Timeline complète</div>
+              <div class="ct">Toutes les étapes du dossier</div>
+            </div>
+            <div class="pill" id="s-pct">0%</div>
+          </div>
+          <div class="cb">
+            <div class="timeline" id="s-timeline"></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="ch">
+            <div>
+              <div class="ck">Documents</div>
+              <div class="ct">Pièces et fichiers</div>
+            </div>
+          </div>
+          <div class="cb">
+            <div class="doc-upload">
+              <input class="inp" id="doc-file" type="file" multiple />
+              <button class="btn-primary" id="doc-add" type="button">Ajouter</button>
+            </div>
+            <div class="doc-list" id="doc-list"></div>
+          </div>
+        </section>
+
+        <section class="card full">
+          <div class="ch">
+            <div>
+              <div class="ck">Historique des actions</div>
+              <div class="ct">Journal et traçabilité</div>
+            </div>
+            <button class="btn-ghost" id="hist-clear" type="button">Vider</button>
+          </div>
+          <div class="cb">
+            <div class="hist-add">
+              <input class="inp" id="hist-text" placeholder="Ajouter une action (ex: Documents validés…)" />
+              <button class="btn-primary" id="hist-add" type="button">Ajouter</button>
+            </div>
+            <div class="hist" id="hist"></div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="./assets/js/suivi.js"></script>
+  </body>
+</html>
+

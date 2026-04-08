@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GUASP — Paiement</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/paiement.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <div class="card">
+        <div class="head">
+          <div>
+            <div class="eyebrow">Paiement (optionnel)</div>
+            <div class="title">Intégration bancaire</div>
+            <div class="sub" id="p-sub">—</div>
+          </div>
+          <img class="logo" src="./assets/images/Logo.png" alt="Logo GUASP" />
+        </div>
+
+        <div class="body">
+          <div class="grid2">
+            <div class="field">
+              <label>Référence dossier</label>
+              <input class="inp" id="p-ref" readonly />
+            </div>
+            <div class="field">
+              <label>Montant</label>
+              <input class="inp" id="p-amount" placeholder="ex: 2500" />
+            </div>
+          </div>
+
+          <div class="grid2">
+            <div class="field">
+              <label>Méthode</label>
+              <select class="sel" id="p-method">
+                <option value="CMI">CMI</option>
+                <option value="API">API</option>
+                <option value="MANUEL">Manuel</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Référence paiement</label>
+              <input class="inp" id="p-payref" placeholder="ex: CMI-xxxx" />
+            </div>
+          </div>
+
+          <div class="notice">
+            Ceci est une page “optionnelle” pour l’intégration bancaire (mock). Elle simule un paiement et renvoie au wizard.
+          </div>
+
+          <div class="actions">
+            <a class="btn-ghost" id="btn-cancel" href="./dossier.html">Annuler</a>
+            <button class="btn-primary" id="btn-pay" type="button">Payer</button>
+          </div>
+
+          <div class="ok" id="p-ok" aria-live="polite"></div>
+          <div class="err" id="p-err" aria-live="polite"></div>
+        </div>
+      </div>
+    </main>
+
+    <script src="./assets/js/paiement.js"></script>
+  </body>
+</html>
+

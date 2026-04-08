@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GUASP — Dossier</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/dossier.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="sb-section">Navigation</div>
+        <a class="sb-item" href="./dashboard.html">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+          <span>Mes dossiers</span>
+        </a>
+
+        <div class="sb-section">Étapes</div>
+        <div class="step-nav" id="step-nav"></div>
+
+        <div class="sb-bottom">
+          <div class="sb-user">
+            <div class="sb-avatar" id="sb-avatar">HE</div>
+            <div>
+              <div class="sb-uname" id="sb-uname">Hiba Elbakkouri</div>
+              <div class="sb-urole">Importateur</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="topbar">
+          <div>
+            <div class="eyebrow">Dossier véhicule</div>
+            <div class="page-title" id="veh-title">—</div>
+            <div class="subline" id="veh-sub">—</div>
+          </div>
+          <div class="top-actions">
+            <img class="top-logo" src="./assets/images/Logo.png" alt="Logo GUASP" />
+            <a class="btn-ghost" id="btn-suivi" href="./suivi.html">Suivi dossier</a>
+            <a class="btn-ghost" href="./dashboard.html">Retour aux dossiers</a>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="prog-header">
+            <div class="prog-label">Progression</div>
+            <div class="prog-pct" id="prog-pct">0%</div>
+          </div>
+          <div class="prog-bar">
+            <div class="prog-fill" id="prog-fill" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <section class="card">
+          <div class="card-h">
+            <div>
+              <div class="card-kicker" id="step-kicker">Étape 1</div>
+              <div class="card-title" id="step-title">—</div>
+              <div class="card-sub" id="step-dur">—</div>
+            </div>
+            <div class="card-actions">
+              <button class="btn-ghost" type="button" id="btn-prev">Précédent</button>
+              <button class="btn-primary" type="button" id="btn-next">Suivant</button>
+            </div>
+          </div>
+
+          <div class="card-b" id="step-body"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./assets/js/dossier.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GUASP — Accès</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+
+      <!-- ══ LEFT ══ -->
+      <div class="left">
+        <div class="left-center">
+          <div class="hero-label">Plateforme logistique</div>
+          <div class="hero-title">
+            Du port à la<br /><em>carte grise</em>,<br />en clarté.
+          </div>
+          <div class="hero-desc">
+            Suivez chaque étape de l'importation de votre véhicule —
+            de la douane à l'immatriculation.
+          </div>
+        </div>
+
+        <div class="left-stats">
+          <div class="stat">
+            <div class="stat-n">14</div>
+            <div class="stat-l">Étapes</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">7</div>
+            <div class="stat-l">Circuits</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">20</div>
+            <div class="stat-l">Ans de mandat</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ RIGHT ══ -->
+      <div class="right">
+        <div class="form-wrap">
+
+          <div class="right-logo">
+            <img src="./assets/images/Logo.png" alt="Logo GUASP" />
+          </div>
+
+          <!-- Tabs -->
+          <div class="tabs">
+            <button class="tab" id="tab-login" type="button" onclick="showTab('login')">Connexion</button>
+            <button class="tab active" id="tab-signup" type="button" onclick="showTab('signup')">Inscription</button>
+          </div>
+
+          <!-- ── LOGIN ── -->
+          <div class="panel" id="panel-login">
+            <div class="form-eyebrow">Bon retour</div>
+            <div class="form-title">Accéder<br>à mon espace.</div>
+
+            <div class="fields">
+              <div class="field">
+                <label class="static-label" for="le">Email</label>
+                <div class="field-inp-wrap">
+                  <input type="email" id="le" placeholder="vous@exemple.com" autocomplete="email" />
+                </div>
+                <div class="field-line"></div>
+              </div>
+
+              <div class="field">
+                <label class="static-label" for="lp">Mot de passe</label>
+                <div class="field-inp-wrap">
+                  <input type="password" id="lp" placeholder="••••••••" autocomplete="current-password" />
+                </div>
+                <div class="field-line"></div>
+              </div>
+
+              <div class="forgot-row">
+                <a href="#" class="forgot-link">Mot de passe oublié ?</a>
+              </div>
+
+              <div class="emsg" id="le-err" role="alert">
+                Email ou mot de passe incorrect.
+              </div>
+
+              <div class="submit-row">
+                <button class="btn-submit" id="btn-login" type="button">Se connecter</button>
+                <a href="#" class="alt-link" onclick="showTab('signup'); return false;">Créer un compte</a>
+              </div>
+
+              <div class="notice">
+                <span class="notice-dot"></span>
+                Les agents SGUASP reçoivent leurs identifiants de l'administrateur.
+              </div>
+            </div>
+          </div>
+
+          <!-- ── SIGNUP ── -->
+          <div class="panel active" id="panel-signup">
+
+            <!-- Success -->
+            <div class="success" id="success-msg">
+              <div class="success-icon">✓</div>
+              <div class="success-title">Compte créé</div>
+              <div class="success-sub">Un email de confirmation vous a été envoyé.</div>
+              <button class="btn-submit btn-small" id="btn-to-login" type="button">Se connecter</button>
+            </div>
+
+            <div id="signup-form">
+              <div class="form-eyebrow">Nouveau compte</div>
+              <div class="form-title">Créer un<br>compte.</div>
+
+              <!-- Role selector -->
+              <div class="roles">
+                <label class="role active" id="r-imp" onclick="selRole('imp')">
+                  <input type="radio" name="role" value="importer" checked />
+                  <div class="role-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M3 18h18"/>
+                      <path d="M4 17l4-2 4 2 4-2 4 2"/>
+                      <path d="M6 15V9l6-4 6 4v6"/>
+                    </svg>
+                  </div>
+                  <div class="role-name">Importateur</div>
+                  <div class="role-desc">Particulier ou entreprise</div>
+                </label>
+                <label class="role" id="r-tra" onclick="selRole('tra')">
+                  <input type="radio" name="role" value="transitaire" />
+                  <div class="role-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <rect x="7" y="3" width="10" height="4" rx="1"/>
+                      <path d="M8 7H6a2 2 0 00-2 2v11a2 2 0 002 2h12a2 2 0 002-2V9a2 2 0 00-2-2h-2"/>
+                      <path d="M7.5 12h9"/>
+                      <path d="M7.5 16h6"/>
+                    </svg>
+                  </div>
+                  <div class="role-name">Transitaire</div>
+                  <div class="role-desc">Agent en douane agréé</div>
+                </label>
+              </div>
+
+              <div class="fields">
+
+                <!-- Prénom + Nom -->
+                <div class="field-row">
+                  <div class="field">
+                    <label class="static-label" for="sfn">Prénom</label>
+                    <div class="field-inp-wrap">
+                      <input type="text" id="sfn" placeholder="Kofi" autocomplete="given-name" />
+                    </div>
+                    <div class="field-line"></div>
+                  </div>
+                  <div class="field">
+                    <label class="static-label" for="sln">Nom</label>
+                    <div class="field-inp-wrap">
+                      <input type="text" id="sln" placeholder="Asante" autocomplete="family-name" />
+                    </div>
+                    <div class="field-line"></div>
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="field">
+                  <label class="static-label" for="sem">Email professionnel</label>
+                  <div class="field-inp-wrap">
+                    <input type="email" id="sem" placeholder="vous@societe.ci" autocomplete="email" />
+                  </div>
+                  <div class="field-line"></div>
+                </div>
+
+                <!-- Téléphone -->
+                <div class="field">
+                  <label class="static-label" for="sph">
+                    Téléphone
+                    <span class="field-badge">WhatsApp</span>
+                  </label>
+                  <div class="field-inp-wrap">
+                    <input type="tel" id="sph" placeholder="+225 07 XX XX XX XX" />
+                  </div>
+                  <div class="field-line"></div>
+                </div>
+
+                <!-- Code SACO -->
+                <div class="field">
+                  <label class="static-label" for="sco">
+                    Code SACO
+                    <span class="field-badge">Optionnel</span>
+                  </label>
+                  <div class="field-inp-wrap">
+                    <input type="text" id="sco" placeholder="Ex : SACO-12345" />
+                  </div>
+                  <div class="field-line"></div>
+                </div>
+
+                <!-- Mot de passe -->
+                <div class="field">
+                  <label class="static-label" for="spw">Mot de passe</label>
+                  <div class="field-inp-wrap">
+                    <input type="password" id="spw" placeholder="8 caractères minimum" autocomplete="new-password" />
+                  </div>
+                  <div class="field-line"></div>
+                </div>
+
+                <div class="emsg" id="se-err" role="alert">
+                  Veuillez remplir tous les champs obligatoires.
+                </div>
+
+                <div class="submit-row">
+                  <button class="btn-submit" id="btn-signup" type="button">Créer mon compte</button>
+                  <a href="#" class="alt-link" onclick="showTab('login'); return false;">Déjà un compte</a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>

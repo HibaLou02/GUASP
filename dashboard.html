@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GUASP — Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/dashboard.css" />
+  </head>
+  <body>
+    <!-- ══════════════════════════════
+         DASHBOARD IMPORTATEUR
+    ══════════════════════════════ -->
+    <div class="view active" id="view-imp">
+      <div class="sidebar sidebar-imp">
+        <div class="mode-switch" aria-label="Mode dashboard">
+          <button class="msw active" type="button" onclick="switchRole('imp')">
+            Importateur
+          </button>
+          <button class="msw" type="button" onclick="switchRole('agent')">
+            Agent
+          </button>
+        </div>
+
+        <div class="sb-section">Navigation</div>
+        <a class="sb-item on" href="#">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+          <span>Mes dossiers</span>
+        </a>
+        <a class="sb-item" href="#">
+          <svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+          </svg>
+          <span>Documents</span>
+        </a>
+        <a class="sb-item" href="#">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+          </svg>
+          <span>Messages</span>
+        </a>
+
+        <div class="sb-section">Compte</div>
+        <a class="sb-item" href="#">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+          </svg>
+          <span>Mon profil</span>
+        </a>
+
+        <div class="sb-bottom">
+          <div class="sb-user">
+            <div class="sb-avatar">HE</div>
+            <div>
+              <div class="sb-uname">Hiba Elbakkouri</div>
+              <div class="sb-urole">Importateur</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="topbar">
+          <div>
+            <div class="eyebrow">Espace importateur</div>
+            <div class="page-title">Mes dossiers</div>
+          </div>
+          <div class="top-actions">
+            <img class="top-logo" src="./assets/images/Logo.png" alt="Logo GUASP" />
+            <button class="btn-primary" type="button" onclick="window.location.href='./dossier.html'">
+              <svg viewBox="0 0 24 24">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              Nouveau dossier
+            </button>
+          </div>
+        </div>
+
+        <!-- KPIs -->
+        <div class="kpis">
+          <div class="kpi sel" style="--kc:#888" onclick="fi('all',0)">
+            <div class="kpi-lbl">Total</div>
+            <div class="kpi-n">12</div>
+            <div class="kpi-s">dossiers</div>
+          </div>
+          <div class="kpi" style="--kc:#C9A96E" onclick="fi('cours',1)">
+            <div class="kpi-lbl">En cours</div>
+            <div class="kpi-n">5</div>
+            <div class="kpi-s">en traitement</div>
+          </div>
+          <div class="kpi" style="--kc:#111010" onclick="fi('valide',2)">
+            <div class="kpi-lbl">Validés</div>
+            <div class="kpi-n">4</div>
+            <div class="kpi-s">finalisés</div>
+          </div>
+          <div class="kpi" style="--kc:#B04030" onclick="fi('rejete',3)">
+            <div class="kpi-lbl">Rejetés</div>
+            <div class="kpi-n">1</div>
+            <div class="kpi-s">à corriger</div>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters">
+          <div class="sw">
+            <svg viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+            <input
+              class="si"
+              id="imp-search"
+              placeholder="Référence, véhicule, client…"
+              oninput="renderImp()"
+            />
+          </div>
+          <select class="fsel" id="imp-sort" onchange="renderImp()">
+            <option value="date-desc">Plus récents</option>
+            <option value="date-asc">Plus anciens</option>
+          </select>
+          <div class="rc" id="imp-count">12 dossiers</div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-wrap">
+          <div class="thead thead-imp">
+            <div class="th">Dossier</div>
+            <div class="th">Client</div>
+            <div class="th">Date</div>
+            <div class="th">Étape</div>
+            <div class="th">Statut</div>
+            <div class="th"></div>
+          </div>
+          <div id="imp-body"></div>
+          <div class="empty" id="imp-empty">
+            <svg viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+            <div class="etxt">Aucun dossier trouvé.</div>
+          </div>
+          <div class="pagi">
+            <div class="pinfo" id="imp-pinfo">1 – 10 sur 12</div>
+            <div class="pbtns">
+              <button class="pb" type="button" aria-label="Page précédente">
+                <svg viewBox="0 0 24 24">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+              <button class="pb active" type="button">1</button>
+              <button class="pb" type="button">2</button>
+              <button class="pb" type="button" aria-label="Page suivante">
+                <svg viewBox="0 0 24 24">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Roadmap modal (opens on dossier click) -->
+        <div class="rm-modal" id="rm-modal" aria-hidden="true">
+          <div class="rm-dialog" role="dialog" aria-modal="true" aria-label="Suivi des étapes">
+            <div id="rm-modal-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         DASHBOARD AGENT SGUASP
+    ══════════════════════════════ -->
+    <div class="view" id="view-agent">
+      <div class="sidebar sidebar-agent">
+        <div class="mode-switch" aria-label="Mode dashboard">
+          <button class="msw" type="button" onclick="switchRole('imp')">
+            Importateur
+          </button>
+          <button class="msw active" type="button" onclick="switchRole('agent')">
+            Agent
+          </button>
+        </div>
+
+        <div class="sb-section">File de travail</div>
+        <a class="sb-item on" href="#">
+          <svg viewBox="0 0 24 24">
+            <path d="M9 11l3 3L22 4" />
+            <path
+              d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"
+            />
+          </svg>
+          <span>Cas assignés</span>
+          <span class="sb-notif">3</span>
+        </a>
+        <a class="sb-item" href="#">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+          <span>Tous les dossiers</span>
+        </a>
+        <a class="sb-item" href="#">
+          <svg viewBox="0 0 24 24">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 00-3-3.87" />
+            <path d="M16 3.13a4 4 0 010 7.75" />
+          </svg>
+          <span>Équipe</span>
+        </a>
+        <a class="sb-item" href="#">
+          <svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+          </svg>
+          <span>Documents</span>
+        </a>
+        <a class="sb-item" href="#">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+          </svg>
+          <span>Messages</span>
+          <span class="sb-notif">7</span>
+        </a>
+
+        <div class="sb-section">Admin</div>
+        <a class="sb-item" href="#">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+          </svg>
+          <span>Mon profil</span>
+        </a>
+
+        <div class="sb-bottom">
+          <div class="sb-user">
+            <div class="sb-avatar">SS</div>
+            <div>
+              <div class="sb-uname">Sohaib Soussi</div>
+              <div class="sb-urole">Agent</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="topbar">
+          <div>
+            <div class="eyebrow">Espace agent</div>
+            <div class="page-title">File de travail</div>
+          </div>
+          <button class="btn-primary" type="button">
+            <svg viewBox="0 0 24 24">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            Assigner un cas
+          </button>
+        </div>
+
+        <!-- KPIs -->
+        <div class="kpis">
+          <div class="kpi sel" style="--kc:#888" onclick="fa('all',0)">
+            <div class="kpi-lbl">Assignés</div>
+            <div class="kpi-n">8</div>
+            <div class="kpi-s">cas actifs</div>
+          </div>
+          <div class="kpi" style="--kc:#111010" onclick="fa('urgent',1)">
+            <div class="kpi-lbl">Urgents</div>
+            <div class="kpi-n">3</div>
+            <div class="kpi-s">sous 24h</div>
+          </div>
+          <div class="kpi" style="--kc:#C9A96E" onclick="fa('attente',2)">
+            <div class="kpi-lbl">En attente</div>
+            <div class="kpi-n">2</div>
+            <div class="kpi-s">docs manquants</div>
+          </div>
+          <div class="kpi" style="--kc:#B8B4AA" onclick="fa('assigne',3)">
+            <div class="kpi-lbl">À traiter</div>
+            <div class="kpi-n">3</div>
+            <div class="kpi-s">en file</div>
+          </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters">
+          <div class="sw">
+            <svg viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+            <input
+              class="si"
+              id="agent-search"
+              placeholder="Référence, importateur…"
+              oninput="renderAgent()"
+            />
+          </div>
+          <select class="fsel" id="agent-equipe" onchange="renderAgent()">
+            <option value="">Toute l'équipe</option>
+            <option value="moi">Mes cas</option>
+          </select>
+          <select class="fsel" id="agent-circuit" onchange="renderAgent()">
+            <option value="">Tous circuits</option>
+            <option value="C1">Circuit 1</option>
+            <option value="C2">Circuit 2</option>
+            <option value="C3">Circuit 3</option>
+          </select>
+          <div class="rc" id="agent-count">8 cas</div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-wrap">
+          <div class="thead thead-agent">
+            <div class="th">Dossier</div>
+            <div class="th">Importateur</div>
+            <div class="th">Étape en cours</div>
+            <div class="th">Circuit</div>
+            <div class="th">Priorité</div>
+            <div class="th">Statut</div>
+            <div class="th"></div>
+          </div>
+          <div id="agent-body"></div>
+          <div class="empty" id="agent-empty">
+            <svg viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+            </svg>
+            <div class="etxt">Aucun cas trouvé.</div>
+          </div>
+          <div class="pagi">
+            <div class="pinfo">1 – 8 sur 8</div>
+            <div class="pbtns">
+              <button class="pb active" type="button">1</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/js/dashboard.js"></script>
+  </body>
+</html>
+
