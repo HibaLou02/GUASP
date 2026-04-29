@@ -2,32 +2,38 @@
    DATA
 ══════════════════════════════ */
 const IMP_DATA = [
-  { ref: 'GSP-2024-0087', v: 'Toyota Land Cruiser 2022', c: 'Hiba Elbakkouri', d: '12 jan. 2025', e: 'Inspection — 6/8', s: 'cours' },
-  { ref: 'GSP-2024-0086', v: 'Mercedes GLE 350 2023', c: 'Salma Elbakkouri', d: '08 jan. 2025', e: 'Documents — 2/8', s: 'cours' },
-  { ref: 'GSP-2024-0081', v: 'BMW X5 xDrive 2021', c: 'Hiba Elbakkouri', d: '22 déc. 2024', e: 'Sortie véhicule — 8/8', s: 'cours' },
-  { ref: 'GSP-2024-0074', v: 'Honda CR-V 2022', c: 'Sohaib Soussi', d: '15 déc. 2024', e: 'Sortie véhicule — 8/8', s: 'valide' },
-  { ref: 'GSP-2024-0071', v: 'Hyundai Tucson 2023', c: 'Hiba Elbakkouri', d: '10 déc. 2024', e: 'Sortie véhicule — 8/8', s: 'valide' },
-  { ref: 'GSP-2024-0068', v: 'Ford Ranger 2022', c: 'Damouh', d: '02 déc. 2024', e: 'Sortie véhicule — 8/8', s: 'valide' },
-  { ref: 'GSP-2024-0063', v: 'Renault Duster 2021', c: 'Hiba Elbakkouri', d: '18 nov. 2024', e: 'Sortie véhicule — 8/8', s: 'valide' },
-  { ref: 'GSP-2024-0058', v: 'Nissan Navara 2020', c: 'Sohaib Soussi', d: '05 nov. 2024', e: 'Vérification — 4/8', s: 'rejete' },
-  { ref: 'GSP-2024-0055', v: 'Peugeot 3008 2023', c: 'Hiba Elbakkouri', d: '28 oct. 2024', e: 'Non soumis — 0/8', s: 'brouillon' },
-  { ref: 'GSP-2024-0051', v: 'Mitsubishi Pajero 2022', c: 'Damouh', d: '20 oct. 2024', e: 'Non soumis — 0/8', s: 'brouillon' },
-  { ref: 'GSP-2024-0048', v: 'VW Touareg 2021', c: 'Hiba Elbakkouri', d: '12 oct. 2024', e: 'Transfert vers parc — 5/8', s: 'cours' },
-  { ref: 'GSP-2024-0044', v: 'Kia Sportage 2022', c: 'Salma Elbakkouri', d: '04 oct. 2024', e: 'Facturation & Paiement — 3/8', s: 'cours' },
+  { ref: 'GSP-2024-0087', v: 'Toyota Land Cruiser 2022', c: 'Hiba Elbakkouri', d: '12 jan. 2025', e: 'Photos CIVIO — 9/14', s: 'cours' },
+  { ref: 'GSP-2024-0086', v: 'Mercedes GLE 350 2023', c: 'Salma Elbakkouri', d: '08 jan. 2025', e: 'Enregistrement SYDAM — 2/14', s: 'cours' },
+  { ref: 'GSP-2024-0081', v: 'BMW X5 xDrive 2021', c: 'Hiba Elbakkouri', d: '22 déc. 2024', e: 'Bon de sortie — 14/14', s: 'cours' },
+  { ref: 'GSP-2024-0074', v: 'Honda CR-V 2022', c: 'Sohaib Soussi', d: '15 déc. 2024', e: 'Bon de sortie — 14/14', s: 'valide' },
+  { ref: 'GSP-2024-0071', v: 'Hyundai Tucson 2023', c: 'Hiba Elbakkouri', d: '10 déc. 2024', e: 'Bon de sortie — 14/14', s: 'valide' },
+  { ref: 'GSP-2024-0068', v: 'Ford Ranger 2022', c: 'Damouh', d: '02 déc. 2024', e: 'Bon de sortie — 14/14', s: 'valide' },
+  { ref: 'GSP-2024-0063', v: 'Renault Duster 2021', c: 'Hiba Elbakkouri', d: '18 nov. 2024', e: 'Bon de sortie — 14/14', s: 'valide' },
+  { ref: 'GSP-2024-0058', v: 'Nissan Navara 2020', c: 'Sohaib Soussi', d: '05 nov. 2024', e: 'Paiement — 4/14', s: 'rejete' },
+  { ref: 'GSP-2024-0055', v: 'Peugeot 3008 2023', c: 'Hiba Elbakkouri', d: '28 oct. 2024', e: 'Non soumis — 0/14', s: 'brouillon' },
+  { ref: 'GSP-2024-0051', v: 'Mitsubishi Pajero 2022', c: 'Damouh', d: '20 oct. 2024', e: 'Non soumis — 0/14', s: 'brouillon' },
+  { ref: 'GSP-2024-0048', v: 'VW Touareg 2021', c: 'Hiba Elbakkouri', d: '12 oct. 2024', e: 'BAD — 10/14', s: 'cours' },
+  { ref: 'GSP-2024-0044', v: 'Kia Sportage 2022', c: 'Salma Elbakkouri', d: '04 oct. 2024', e: 'Facture — 3/14', s: 'cours' },
 ];
 
 /* ══════════════════════════════
    ROADMAP (inline on dashboard)
 ══════════════════════════════ */
 const ROADMAP_STEPS = [
-  { name: 'Création dossier', dur: '1–2 jours', items: ['Informations importateur', 'Informations véhicule'] },
-  { name: 'Documents', dur: '1–2 jours', items: ['Upload des fichiers', 'Vérification de complétude'] },
-  { name: 'Facturation & Paiement', dur: '1 jour', items: ['Génération facture', 'Paiement (CMI / API / manuel)'] },
-  { name: 'Vérification', dur: '2–3 jours', items: ['Validation par admin', 'Gestion des blocages et rejets'] },
-  { name: 'Transfert vers parc', dur: '1 jour', items: ['Envoi vers parc', 'Constat sommaire'] },
-  { name: 'Inspection', dur: '1–2 jours', items: ['Inspection technique (RTI)', 'Upload des photos'] },
-  { name: 'Immatriculation', dur: '2–4 jours', items: ['Transmission BVA', "Attribution du numéro d'immatriculation", 'Génération de la carte grise'] },
-  { name: 'Sortie véhicule', dur: '1 jour', items: ['Autorisation de sortie', 'Clôture du dossier'] },
+  { name: "Réception dossier & identification véhicule", dur: "Manuel", items: ["Dossier réceptionné", "Véhicule identifié"] },
+  { name: "Enregistrement fiche SYDAM AUTO", dur: "Manuel", items: ["Fiche SYDAM AUTO enregistrée"] },
+  { name: "Génération facture SGUASP", dur: "Auto", items: ["Facture générée"] },
+  { name: "Paiement & émission reçu", dur: "Auto", items: ["Paiement confirmé", "Reçu émis"] },
+  { name: "Vérification code importateur (SACO)", dur: "Manuel", items: ["Résultat SACO saisi"] },
+  { name: "Vérification manifeste navire", dur: "Manuel", items: ["Manifeste vérifié"] },
+  { name: "Visite douanière", dur: "Manuel", items: ["Visite douanière réalisée"] },
+  { name: "Inspection RTI (Ministère Transports)", dur: "Manuel", items: ["Note RTI saisie"] },
+  { name: "Photos CIVIO", dur: "Manuel / semi-auto", items: ["Photos prises et associées"] },
+  { name: "BAD (Bon À Délivrer)", dur: "Manuel", items: ["BAD reçu et saisi"] },
+  { name: "Débarquement / Retrait du navire", dur: "Manuel", items: ["Débarquement confirmé"] },
+  { name: "Désignation emplacement stationnement", dur: "Manuel", items: ["Emplacement désigné"] },
+  { name: "Visite technique", dur: "Manuel / semi-auto", items: ["Visite technique effectuée"] },
+  { name: "Génération bon de sortie", dur: "Auto", items: ["Bon de sortie généré", "Dossier clôturé"] },
 ];
 
 function parseStepProgress(eText) {
@@ -144,7 +150,7 @@ function openRoadmap(ref) {
                   <div class="step-name">${s.name}</div>
                   <span class="step-badge ${badgeCls}">${badgeTxt}</span>
                 </div>
-                <div class="step-desc">${(s.items || []).map((it) => `• ${it}`).join('<br>')}</div>
+                <div class="step-desc"></div>
                 <div class="step-meta">
                   <div class="step-dur">Durée : <span>${s.dur}</span></div>
                   <div class="step-date">${dateTxt}</div>

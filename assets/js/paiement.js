@@ -18,7 +18,8 @@ function init() {
   el('p-amount').value = amount;
   el('p-sub').textContent = `${ref} • ${new Date().toLocaleDateString('fr-FR')}`;
 
-  el('btn-cancel').href = `./dossier.html${ref && ref !== 'NOUVEAU' ? `?ref=${encodeURIComponent(ref)}&step=2` : ''}`;
+  // Étape 4 (Paiement) => index 3
+  el('btn-cancel').href = `./dossier.html${ref && ref !== 'NOUVEAU' ? `?ref=${encodeURIComponent(ref)}&step=3` : ''}`;
 
   el('btn-pay').addEventListener('click', () => {
     el('p-ok').textContent = '';
@@ -50,7 +51,7 @@ function init() {
 
     el('p-ok').textContent = `Paiement enregistré (${payload.payref}). Retour au dossier...`;
     setTimeout(() => {
-      const back = `./dossier.html${ref && ref !== 'NOUVEAU' ? `?ref=${encodeURIComponent(ref)}&step=2&paid=1` : '?step=2&paid=1'}`;
+      const back = `./dossier.html${ref && ref !== 'NOUVEAU' ? `?ref=${encodeURIComponent(ref)}&step=3&paid=1` : '?step=3&paid=1'}`;
       window.location.href = back;
     }, 650);
   });

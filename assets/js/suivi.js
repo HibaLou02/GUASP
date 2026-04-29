@@ -1,12 +1,18 @@
 const ROADMAP_STEPS = [
-  { name: 'Création dossier', dur: '1–2 jours', items: ['Informations importateur', 'Informations véhicule'] },
-  { name: 'Documents', dur: '1–2 jours', items: ['Upload des fichiers', 'Vérification de complétude'] },
-  { name: 'Facturation & Paiement', dur: '1 jour', items: ['Génération facture', 'Paiement (CMI / API / manuel)'] },
-  { name: 'Vérification', dur: '2–3 jours', items: ['Validation par admin', 'Gestion des blocages et rejets'] },
-  { name: 'Transfert vers parc', dur: '1 jour', items: ['Envoi vers parc', 'Constat sommaire'] },
-  { name: 'Inspection', dur: '1–2 jours', items: ['Inspection technique (RTI)', 'Upload des photos'] },
-  { name: 'Immatriculation', dur: '2–4 jours', items: ['Transmission BVA', "Attribution du numéro d'immatriculation", 'Génération de la carte grise'] },
-  { name: 'Sortie véhicule', dur: '1 jour', items: ['Autorisation de sortie', 'Clôture du dossier'] },
+  { name: "Réception dossier & identification véhicule", dur: "Manuel", items: ["Dossier réceptionné", "Véhicule identifié"] },
+  { name: "Enregistrement fiche SYDAM AUTO", dur: "Manuel", items: ["Fiche SYDAM AUTO enregistrée"] },
+  { name: "Génération facture SGUASP", dur: "Auto", items: ["Facture générée"] },
+  { name: "Paiement & émission reçu", dur: "Auto", items: ["Paiement confirmé", "Reçu émis"] },
+  { name: "Vérification code importateur (SACO)", dur: "Manuel", items: ["Résultat SACO saisi"] },
+  { name: "Vérification manifeste navire", dur: "Manuel", items: ["Manifeste vérifié"] },
+  { name: "Visite douanière", dur: "Manuel", items: ["Visite douanière réalisée"] },
+  { name: "Inspection RTI (Ministère Transports)", dur: "Manuel", items: ["Note RTI saisie"] },
+  { name: "Photos CIVIO", dur: "Manuel / semi-auto", items: ["Photos prises et associées"] },
+  { name: "BAD (Bon À Délivrer)", dur: "Manuel", items: ["BAD reçu et saisi"] },
+  { name: "Débarquement / Retrait du navire", dur: "Manuel", items: ["Débarquement confirmé"] },
+  { name: "Désignation emplacement stationnement", dur: "Manuel", items: ["Emplacement désigné"] },
+  { name: "Visite technique", dur: "Manuel / semi-auto", items: ["Visite technique effectuée"] },
+  { name: "Génération bon de sortie", dur: "Auto", items: ["Bon de sortie généré", "Dossier clôturé"] },
 ];
 
 function qs() {
@@ -43,9 +49,10 @@ function setJSON(key, value) {
 }
 
 function currentStep(ref) {
-  const n = parseInt(localStorage.getItem(`step:${ref}`) || '0', 10);
-  if (Number.isNaN(n)) return 0;
-  return Math.max(0, Math.min(ROADMAP_STEPS.length - 1, n));
+  // Progression réelle: basée sur les étapes validées (done:<ref>)
+  const done = getJSON(`done:${ref}`, {});
+  const doneCount = ROADMAP_STEPS.reduce((acc, _s, i) => acc + (done?.[String(i + 1)] ? 1 : 0), 0);
+  return Math.max(0, Math.min(ROADMAP_STEPS.length, doneCount));
 }
 
 function renderHeader(ref) {
@@ -60,17 +67,12 @@ function renderTimeline(ref) {
   el('s-pct').textContent = `${pct}%`;
 
   const paid = getJSON(`pay:${ref}`, null);
-  const ck = getJSON(`ck:${ref}`, {});
+  const done = getJSON(`done:${ref}`, {});
 
   el('s-timeline').innerHTML = ROADMAP_STEPS.map((s, i) => {
-    const cls = i < idx ? 'done' : i === idx ? 'now' : 'todo';
-    const payNote = i === 2 && paid?.status === 'paid' ? `Paiement: ${paid.payref} • ${paid.amount} MAD` : '';
-    const items = (s.items || []).map((it, j) => {
-      const key = `${i}:${j}`;
-      const ok = ck?.[key] ? '✓ ' : '';
-      return `<li>${ok}${it}</li>`;
-    }).join('');
-
+    const isDone = Boolean(done?.[String(i + 1)]);
+    const cls = isDone ? 'done' : i === idx ? 'now' : 'todo';
+    const payNote = i === 3 && paid?.status === 'paid' ? `Paiement: ${paid.payref} • ${paid.amount} MAD` : '';
     return `
       <div class="tl ${cls}">
         <div class="tl-left">
@@ -78,7 +80,6 @@ function renderTimeline(ref) {
           <div>
             <div class="tl-name">${s.name}</div>
             <div class="tl-meta">Durée: ${s.dur}${payNote ? ` • ${payNote}` : ''}</div>
-            <ul>${items}</ul>
           </div>
         </div>
         <div class="tag">${i < idx ? 'Terminé' : i === idx ? 'En cours' : 'À faire'}</div>
