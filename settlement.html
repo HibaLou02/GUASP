@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GUASP — Settlement Report</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Reuse existing dashboard visual system -->
+    <link rel="stylesheet" href="./assets/css/dashboard.css?v=20260430-2" />
+    <link rel="stylesheet" href="./assets/css/settlement.css?v=20260430-2" />
+  </head>
+  <body>
+    <div class="view active">
+      <div class="sidebar sidebar-imp">
+        <div class="sb-section">Navigation</div>
+        <a class="sb-item" href="./dashboard.html">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+          <span>Mes dossiers</span>
+        </a>
+        <a class="sb-item on" href="./settlement.html">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 1v22" />
+            <path d="M17 5H9.5a3.5 3.5 0 100 7H14a3 3 0 110 6H6" />
+          </svg>
+          <span>Settlement Report</span>
+        </a>
+
+        <div class="sb-section">Compte</div>
+        <a class="sb-item" href="./dashboard.html">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+          </svg>
+          <span>Mon profil</span>
+        </a>
+
+        <div class="sb-bottom">
+          <div class="sb-user">
+            <div class="sb-avatar">HE</div>
+            <div>
+              <div class="sb-uname">Hiba Elbakkouri</div>
+              <div class="sb-urole">Importateur</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="topbar">
+          <div>
+            <div class="eyebrow">Automated Revenue Audit</div>
+            <div class="page-title">Revenue Dashboard</div>
+          </div>
+          <div class="top-actions">
+            <img class="top-logo" src="./assets/images/Logo.png" alt="Logo GUASP" />
+            <a class="btn-ghost btn-back" href="./dashboard.html" aria-label="Retour au dashboard">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+              Retour
+            </a>
+          </div>
+        </div>
+
+        <div class="audit-note">
+          Automated Revenue Audit — All fees verified at <b>Stage 4</b> before exit authorization
+        </div>
+
+        <div class="kpis kpis-2">
+          <div class="kpi kpi-static" style="--kc: var(--gold)">
+            <div class="kpi-lbl">Total GUASP Fees Collected</div>
+            <div class="kpi-n" id="kpi-fees">XOF 0</div>
+            <div class="kpi-s">fees locked at Stage 4</div>
+          </div>
+          <div class="kpi kpi-static" style="--kc: var(--black)">
+            <div class="kpi-lbl">Total Vehicles Cleared</div>
+            <div class="kpi-n" id="kpi-cleared">0</div>
+            <div class="kpi-s">exit authorized after fee clearance</div>
+          </div>
+        </div>
+
+        <div class="dash-grid">
+          <section class="table-wrap panel">
+            <div class="panel-h">
+              <div>
+                <div class="panel-k">Revenue by Period</div>
+                <div class="panel-t">Weekly / Monthly</div>
+              </div>
+              <div class="seg" role="tablist" aria-label="Période">
+                <button class="seg-btn on" id="seg-week" type="button">Weekly</button>
+                <button class="seg-btn" id="seg-month" type="button">Monthly</button>
+              </div>
+            </div>
+            <div class="panel-b">
+              <div class="chart" aria-label="Revenue chart" role="img">
+                <div class="chart-bars" id="rev-bars"></div>
+                <div class="chart-x" id="rev-x"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="table-wrap panel">
+            <div class="panel-h">
+              <div>
+                <div class="panel-k">Recent Transactions</div>
+                <div class="panel-t">Verified fees + clearance trail</div>
+              </div>
+            </div>
+            <div class="panel-b">
+              <div class="rt-head">
+                <div class="th">Vehicle ID</div>
+                <div class="th">Importer</div>
+                <div class="th">Fee Amount</div>
+                <div class="th">Stage Cleared</div>
+                <div class="th">Date</div>
+              </div>
+              <div id="rt-body"></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/js/settlement.js?v=20260430-2"></script>
+  </body>
+</html>
+

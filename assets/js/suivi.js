@@ -69,10 +69,36 @@ function renderTimeline(ref) {
   const paid = getJSON(`pay:${ref}`, null);
   const done = getJSON(`done:${ref}`, {});
 
+  const IC = {
+    receipt: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12v20l-2-1-2 1-2-1-2 1-2-1-2 1z"/><path d="M9 7h6"/><path d="M9 11h6"/><path d="M9 15h4"/></svg>`,
+    check: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>`,
+    coin: `<svg viewBox="0 0 24 24" aria-hidden="true"><ellipse class="ic-fill" cx="12" cy="7" rx="6.5" ry="2.5"/><path d="M5.5 7v10c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5V7"/><path d="M5.5 12c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5"/></svg>`,
+  };
+
+  function feeBadges(i) {
+    const step = i + 1;
+    const isPaid = paid?.status === 'paid';
+    if (step === 3) {
+      return `<span class="fee-badge amb">${IC.receipt}Fee Calculated</span>`;
+    }
+    if (step === 4) {
+      return isPaid
+        ? `<span class="fee-badge ok key">${IC.check}Payment Verified</span>`
+        : `<span class="fee-badge amb">${IC.check}Payment Pending</span>`;
+    }
+    if (step === 14) {
+      return isPaid
+        ? `<span class="fee-badge ok">${IC.coin}Fee Cleared</span>`
+        : `<span class="fee-badge amb">${IC.coin}Fee Pending</span>`;
+    }
+    return '';
+  }
+
   el('s-timeline').innerHTML = ROADMAP_STEPS.map((s, i) => {
     const isDone = Boolean(done?.[String(i + 1)]);
     const cls = isDone ? 'done' : i === idx ? 'now' : 'todo';
     const payNote = i === 3 && paid?.status === 'paid' ? `Paiement: ${paid.payref} • ${paid.amount} MAD` : '';
+    const badges = feeBadges(i);
     return `
       <div class="tl ${cls}">
         <div class="tl-left">
@@ -80,6 +106,7 @@ function renderTimeline(ref) {
           <div>
             <div class="tl-name">${s.name}</div>
             <div class="tl-meta">Durée: ${s.dur}${payNote ? ` • ${payNote}` : ''}</div>
+            ${badges ? `<div class="fee-badges">${badges}</div>` : ''}
           </div>
         </div>
         <div class="tag">${i < idx ? 'Terminé' : i === idx ? 'En cours' : 'À faire'}</div>

@@ -65,6 +65,22 @@ b{font-weight:500}
   gap:12px;
 }
 .tl-left{display:flex;gap:10px;align-items:flex-start}
+.fee-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.fee-badge{
+  display:inline-flex;align-items:center;
+  padding:2px 9px;
+  border-radius:999px;
+  font-size:10.5px;
+  font-weight:400;
+  letter-spacing:.02em;
+  white-space:nowrap;
+  border:1px solid transparent;
+}
+.fee-badge svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.8;fill:none;flex-shrink:0;margin-right:6px}
+.fee-badge .ic-fill{fill:currentColor;stroke:none;opacity:.9}
+.fee-badge.amb{background:rgba(201,169,110,.18);border-color:rgba(201,169,110,.35);color:#7A5A20}
+.fee-badge.ok{background:rgba(31,109,58,.10);border-color:rgba(31,109,58,.28);color:#1f6d3a}
+.fee-badge.ok.key{font-weight:500;box-shadow:0 0 0 2px rgba(31,109,58,.08)}
 .dot{
   width:22px;height:22px;border-radius:50%;
   border:1px solid var(--cream3);
